@@ -1,11 +1,10 @@
-import { Button, Profile } from "./components/index";
+import { Product } from "./components/index";
 
 const App = () => {
   return (
-    <>
-      <Button />
-      <Profile />
-    </>
+    <div className="wrapper">
+      <Product />
+    </div>
   );
 };
 
