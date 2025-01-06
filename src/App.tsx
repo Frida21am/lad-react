@@ -1,10 +1,10 @@
-import { Product } from "./components/index";
+import { Layout, CatalogPage } from "./components/index";
 
 const App = () => {
   return (
-    <div className="wrapper">
-      <Product />
-    </div>
+    <Layout>
+      <CatalogPage />
+    </Layout>
   );
 };
 

@@ -1,8 +1,12 @@
-import styles from "./Products.module.scss";
-import { product } from "../../data";
-import { ProductLike } from "../../components/index";
+import styles from "./ProductCard.module.scss";
+import { IProduct } from "../../types/product";
+import { ProductLike } from "../index";
 
-function Product() {
+type ProductProps = {
+  product: IProduct;
+};
+
+const ProductCard = ({ product }: ProductProps) => {
   return (
     <div className={styles.product}>
       <a href="#" className={styles.productImage}>
@@ -18,12 +22,16 @@ function Product() {
             {product.discount}%
           </span>
         </div>
-        <button type="button" className={styles.productButton}>
+        <button
+          type="button"
+          className={styles.productButton}
+          onClick={() => alert("Товар добавлен в корзину")}
+        >
           В корзину
         </button>
       </div>
     </div>
   );
-}
+};
 
-export default Product;
+export default ProductCard;
