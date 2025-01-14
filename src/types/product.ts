@@ -5,4 +5,6 @@ export interface IProduct {
   price: number;
   discount?: number;
   rating: number;
+  isFavorite: boolean;
+  isAddedToCart: boolean;
 }

@@ -1,9 +1,11 @@
-import { useState } from "react";
 import styles from "./ProductLike.module.scss";
 
-function ProductLike() {
-  const [isFavorite, setIsFavorite] = useState(false);
+type ChangeFavoriteProps = {
+  isFavorite: boolean;
+  onFavoriteClick: () => void;
+};
 
+function ProductLike({ isFavorite, onFavoriteClick }: ChangeFavoriteProps) {
   return (
     <div
       className={
@@ -11,7 +13,7 @@ function ProductLike() {
           ? `${styles.productLike} + ${styles.active}`
           : styles.productLike
       }
-      onClick={() => (isFavorite ? setIsFavorite(false) : setIsFavorite(true))}
+      onClick={onFavoriteClick}
     >
       <svg
         width="21"

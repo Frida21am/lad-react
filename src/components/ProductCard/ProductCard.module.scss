@@ -57,10 +57,15 @@
   color: rgba(230, 0, 0, 0.878);
 }
 
-.productButton {
-  padding: 10px 0;
+.productButtons {
+  display: flex;
   margin: 0 auto;
-  width: 150px;
+}
+
+.productButton {
+  width: 260px;
+  height: 50px;
+  margin-right: 10px;
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -75,4 +80,7 @@
   &:hover {
     color: #dbdbdbee;
   }
+}
+.active {
+  width: 100px;
 }

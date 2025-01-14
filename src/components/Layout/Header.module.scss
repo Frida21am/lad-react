@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+//.menu {}
+
+.account {
+  display: flex;
+}
+.menuList {
+  display: flex;
+  li {
+    margin-right: 20px;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+  }
+}

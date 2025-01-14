@@ -1,13 +1,20 @@
-import { ReactNode } from "react";
-import { Profile } from "../index";
+import { Outlet } from "react-router-dom";
+import { Header } from "../index";
+import { IProductInCart } from "../../types/productInCart";
 
-function Layout(props: { children: ReactNode }) {
-  const isLoggedIn = true;
+type HeaderProps = {
+  productsInCart: IProductInCart[];
+};
 
+function Layout({ productsInCart }: HeaderProps) {
   return (
     <div className="wrapper">
-      {Boolean(isLoggedIn) && <Profile />}
-      <main>{props.children}</main>
+      <header>
+        <Header productsInCart={productsInCart} />
+      </header>
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { IProduct } from "./types/product";
 
-export const products: IProduct[] = [
+export const data: IProduct[] = [
   {
     id: 1,
     name: "Наручные часы мужские SKMEI 1251",
@@ -9,6 +9,8 @@ export const products: IProduct[] = [
     price: 8199,
     discount: 30,
     rating: 4.7,
+    isFavorite: false,
+    isAddedToCart: false,
   },
   {
     id: 2,
@@ -18,6 +20,8 @@ export const products: IProduct[] = [
     price: 9599,
     discount: 15,
     rating: 4.2,
+    isFavorite: false,
+    isAddedToCart: false,
   },
   {
     id: 3,
@@ -27,5 +31,7 @@ export const products: IProduct[] = [
     price: 10299,
     discount: 10,
     rating: 4.9,
+    isFavorite: false,
+    isAddedToCart: false,
   },
 ];
