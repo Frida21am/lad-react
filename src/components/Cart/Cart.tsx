@@ -14,8 +14,8 @@ function Cart({ productsInCart }: ProductInCartProps) {
         <div className={styles.cartHeaderCount}>количество</div>
         <div className={styles.cartHeaderCost}>стоимость</div>
       </section>
-      {productsInCart.map((product) => (
-        <CartProduct key={product.id} product={product} />
+      {productsInCart.map((productInCart) => (
+        <CartProduct key={productInCart.id} productInCart={productInCart} />
       ))}
       <section className={styles.cartFooter}>
         <div className={styles.cartFooterCount}>5 ед.</div>

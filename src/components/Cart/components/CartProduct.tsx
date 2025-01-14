@@ -1,22 +1,19 @@
 import styles from "./CartProduct.module.scss";
 import { IProductInCart } from "../../../types/productInCart";
 
-type ProductInCartProps = {
-  product: IProductInCart;
+type ProductProps = {
+  productInCart: IProductInCart;
 };
 
-function CartProduct({ product }: ProductInCartProps) {
+function CartProduct({ productInCart }: ProductProps) {
   return (
     <div className={styles.product}>
       <div className={styles.productImg}>
-        <img
-          src="https://static.insales-cdn.com/images/products/1/4108/504852492/YN55-325A661.jpg"
-          alt="product"
-        />
+        <img src={productInCart.imageUrl} alt="product" />
       </div>
-      <div className={styles.productTitle}>{product.id}</div>
-      <div className={styles.productCount}>количество</div>
-      <div className={styles.productPrice}>1000р.</div>
+      <div className={styles.productTitle}>{productInCart.name}</div>
+      <div className={styles.productCount}>{productInCart.countInCart}</div>
+      <div className={styles.productPrice}>{productInCart.price}</div>
       <div className={styles.productControls}>удалить</div>
     </div>
   );

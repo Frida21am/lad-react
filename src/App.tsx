@@ -34,6 +34,9 @@ const App = () => {
         {
           id: product.id,
           countInCart: 1,
+          name: product.name,
+          imageUrl: product.imageUrl,
+          price: product.price,
         },
       ];
     });
@@ -71,12 +74,7 @@ const App = () => {
       });
     });
   };
-  //console.log(productsInCart);
-  // const arr: boolean[] = [];
-  // products.forEach((el) => {
-  //   arr.push(el.isAddedToCart);
-  // });
-  // console.log(arr);
+
   return (
     <BrowserRouter>
       <Routes>
