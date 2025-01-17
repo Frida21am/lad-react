@@ -1,20 +1,18 @@
-import { Outlet } from "react-router-dom";
 import { Header } from "../index";
 import { IProductInCart } from "../../types/productInCart";
 
 type HeaderProps = {
   productsInCart: IProductInCart[];
+  children: React.ReactNode;
 };
 
-function Layout({ productsInCart }: HeaderProps) {
+function Layout({ productsInCart, children }: HeaderProps) {
   return (
     <div className="wrapper">
       <header>
         <Header productsInCart={productsInCart} />
       </header>
-      <main>
-        <Outlet />
-      </main>
+      <main>{children}</main>
     </div>
   );
 }

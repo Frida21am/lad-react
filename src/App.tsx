@@ -14,9 +14,11 @@ const App = () => {
   const handleChangeFavorite = (product: IProduct) => {
     setProducts((prev) => {
       return prev.map((item) => {
+        // Изменить свойство isFavorite в product на противположное
         if (item.id === product.id) {
           return product;
         }
+        // Остальные элементы просто вернуть
         return { ...item };
       });
     });
@@ -25,12 +27,24 @@ const App = () => {
   const [productsInCart, setProductsInCart] = useState<IProductInCart[]>([]);
 
   const handleChangeCart = (product: IProduct) => {
-    setProductsInCart((prev) => {
+    setProducts((oldProducts) => {
+      return oldProducts.map((item) => {
+        // Изменить свойство isAddedToCart в product на противположное
+        if (item.id === product.id) {
+          return product;
+        }
+        // Остальные элементы просто вернуть
+        return { ...item };
+      });
+    });
+    setProductsInCart((oldProductsInCart) => {
+      // Если нажато "Убрать из корзины" удалить из списка productsInCart этот элемент
       if (!product.isAddedToCart) {
-        return prev.filter((el) => el.id !== product.id);
+        return oldProductsInCart.filter((el) => el.id !== product.id);
       }
+      // Если нажато "Добавить в корзину" к предыдущему массиву productsInCart добавить новый элемент
       return [
-        ...prev,
+        ...oldProductsInCart,
         {
           id: product.id,
           countInCart: 1,
@@ -40,45 +54,45 @@ const App = () => {
         },
       ];
     });
-    setProducts((prev) => {
-      return prev.map((item) => {
-        if (item.id === product.id) {
-          return product;
-        }
-        return { ...item };
-      });
-    });
   };
 
   const handleChangeCounter = (productInCart: IProductInCart) => {
-    setProductsInCart((prev) => {
-      return prev.map((item) => {
-        if (item.id === productInCart.id) {
-          return productInCart;
-        }
-        return { ...item };
-      });
-    });
     setProducts((products) => {
       return products.map((product) => {
+        // Если свойство countInCart текущего элемента равно 0, то у текущего продукта изменить свойство isAddedToCart на false
         if (
-          productInCart.countInCart === 0 &&
-          product.id === productInCart.id
+          product.id === productInCart.id &&
+          productInCart.countInCart === 0
         ) {
           return {
             ...product,
             isAddedToCart: false,
           };
         }
+        // Если свойство countInCart текущего элемента больше 0, то просто вернуть тот же продукт
         return { ...product };
+      });
+    });
+    setProductsInCart((oldProductsInCart) => {
+      // Если свойство countInCart текущего элемента равно 0, удалить этот элемент из массива productsInCart
+      if (productInCart.countInCart === 0) {
+        return productsInCart.filter((el) => el.id !== productInCart.id);
+      }
+      return oldProductsInCart.map((item) => {
+        // Изменить свойство countInCart в productInCart
+        if (item.id === productInCart.id) {
+          return productInCart;
+        }
+        // Остальные элементы просто вернуть
+        return { ...item };
       });
     });
   };
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout productsInCart={productsInCart} />}>
+      <Layout productsInCart={productsInCart}>
+        <Routes>
           <Route
             path="/"
             element={
@@ -97,8 +111,8 @@ const App = () => {
             element={<CartPage productsInCart={productsInCart} />}
           />
           <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 };
