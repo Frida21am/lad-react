@@ -9,8 +9,6 @@ export const data: IProduct[] = [
     price: 8199,
     discount: 30,
     rating: 4.7,
-    isFavorite: false,
-    isAddedToCart: false,
   },
   {
     id: 2,
@@ -20,8 +18,6 @@ export const data: IProduct[] = [
     price: 9599,
     discount: 15,
     rating: 4.2,
-    isFavorite: false,
-    isAddedToCart: false,
   },
   {
     id: 3,
@@ -31,7 +27,5 @@ export const data: IProduct[] = [
     price: 10299,
     discount: 10,
     rating: 4.9,
-    isFavorite: false,
-    isAddedToCart: false,
   },
 ];

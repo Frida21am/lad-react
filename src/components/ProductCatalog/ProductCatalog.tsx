@@ -1,22 +1,23 @@
 import styles from "./ProductCatalog.module.scss";
 import { ProductCard } from "../index";
-import { IProduct } from "../../types/product";
-import { IProductInCart } from "../../types/productInCart";
+import { IDisplayProduct } from "../../types/product";
 
 type ProductProps = {
-  products: IProduct[];
-  productsInCart: IProductInCart[];
-  onChangeFavorite: (product: IProduct) => void;
-  onChangeCart: (product: IProduct) => void;
-  onChangeCounter: (productInCart: IProductInCart) => void;
+  products: IDisplayProduct[];
+  onAddToCart: (productId: number) => void;
+  onRemoveFromCart: (productId: number) => void;
+  onDecreaseCounter: (productId: number) => void;
+  onAddToFavorite: (productId: number) => void;
+  onRemoveFromFavorite: (productId: number) => void;
 };
 
 function ProductCatalog({
   products,
-  productsInCart,
-  onChangeFavorite,
-  onChangeCart,
-  onChangeCounter,
+  onAddToCart,
+  onRemoveFromCart,
+  onAddToFavorite,
+  onRemoveFromFavorite,
+  onDecreaseCounter,
 }: ProductProps) {
   return (
     <div className={styles.products}>
@@ -24,10 +25,11 @@ function ProductCatalog({
         <ProductCard
           key={product.id}
           product={product}
-          productsInCart={productsInCart}
-          onChangeFavorite={onChangeFavorite}
-          onChangeCart={onChangeCart}
-          onChangeCounter={onChangeCounter}
+          onAddToCart={onAddToCart}
+          onRemoveFromCart={onRemoveFromCart}
+          onDecreaseCounter={onDecreaseCounter}
+          onAddToFavorite={onAddToFavorite}
+          onRemoveFromFavorite={onRemoveFromFavorite}
         />
       ))}
     </div>

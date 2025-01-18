@@ -1,8 +1,8 @@
 import { Cart } from "../components/index";
-import { IProductInCart } from "../types/productInCart";
+import { IDisplayProduct } from "../types/product";
 
 type ProductInCartProps = {
-  productsInCart: IProductInCart[];
+  productsInCart: IDisplayProduct[];
 };
 
 function CartPage({ productsInCart }: ProductInCartProps) {

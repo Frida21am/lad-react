@@ -1,69 +1,24 @@
 import styles from "./ProductCard.module.scss";
 import { ProductCounter, ProductLike } from "../index";
-import { IProduct } from "../../types/product";
-import { IProductInCart } from "../../types/productInCart";
+import { IDisplayProduct } from "../../types/product";
 
 type ProductProps = {
-  product: IProduct;
-  productsInCart: IProductInCart[];
-  onChangeFavorite: (product: IProduct) => void;
-  onChangeCart: (product: IProduct) => void;
-  onChangeCounter: (productInCart: IProductInCart) => void;
+  product: IDisplayProduct;
+  onAddToCart: (productId: number) => void;
+  onRemoveFromCart: (productId: number) => void;
+  onDecreaseCounter: (productId: number) => void;
+  onAddToFavorite: (productId: number) => void;
+  onRemoveFromFavorite: (productId: number) => void;
 };
 
 const ProductCard = ({
   product,
-  productsInCart,
-  onChangeFavorite,
-  onChangeCart,
-  onChangeCounter,
+  onAddToCart,
+  onRemoveFromCart,
+  onAddToFavorite,
+  onRemoveFromFavorite,
+  onDecreaseCounter,
 }: ProductProps) => {
-  const productInCart: IProductInCart | undefined = productsInCart.find(
-    (el) => el.id === product.id,
-  );
-
-  const handleIncrement = () => {
-    if (productInCart) {
-      onChangeCounter({
-        ...productInCart,
-        countInCart: productInCart.countInCart + 1,
-      });
-    }
-  };
-
-  const handleDecrement = () => {
-    if (productInCart) {
-      onChangeCounter({
-        ...productInCart,
-        countInCart:
-          productInCart.countInCart > 0 ? productInCart.countInCart - 1 : 0,
-      });
-    }
-  };
-
-  const handleChangeInput = (value: string) => {
-    if (productInCart) {
-      onChangeCounter({
-        ...productInCart,
-        countInCart: +value,
-      });
-    }
-  };
-
-  const handleAddToFavorite = () => {
-    onChangeFavorite({
-      ...product,
-      isFavorite: !product.isFavorite,
-    });
-  };
-
-  const handleAddToCart = () => {
-    onChangeCart({
-      ...product,
-      isAddedToCart: !product.isAddedToCart,
-    });
-  };
-
   return (
     <div className={styles.product}>
       <a href="#" className={styles.productImage}>
@@ -72,7 +27,11 @@ const ProductCard = ({
       <div className={styles.productRating}>{product.rating}</div>
       <ProductLike
         isFavorite={product.isFavorite}
-        onFavoriteClick={handleAddToFavorite}
+        onFavoriteClick={() =>
+          product.isFavorite
+            ? onRemoveFromFavorite(product.id)
+            : onAddToFavorite(product.id)
+        }
       />
       <div className={styles.productInfo}>
         <h2 className={styles.productTitle}>{product.name}</h2>
@@ -86,22 +45,24 @@ const ProductCard = ({
           <button
             type="button"
             className={
-              product.isAddedToCart && productInCart
+              product.countInCart
                 ? styles.productButton + " " + styles.active
                 : styles.productButton
             }
-            onClick={handleAddToCart}
+            onClick={() =>
+              product.countInCart
+                ? onRemoveFromCart(product.id)
+                : onAddToCart(product.id)
+            }
           >
-            {product.isAddedToCart && productInCart
-              ? "Убрать из корзины"
-              : "Добавить в корзину"}
+            {product.countInCart ? "Убрать из корзины" : "Добавить в корзину"}
           </button>
-          {product.isAddedToCart && productInCart ? (
+          {product.countInCart ? (
             <ProductCounter
-              productInCart={productInCart}
-              onIncrement={handleIncrement}
-              onDecrement={handleDecrement}
-              onChangeInput={handleChangeInput}
+              productInCart={product}
+              onIncrement={() => onAddToCart(product.id)}
+              onDecrement={() => onDecreaseCounter(product.id)}
+              //onChangeInput={handleChangeInput}
             />
           ) : null}
         </div>

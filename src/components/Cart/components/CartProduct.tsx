@@ -1,8 +1,8 @@
 import styles from "./CartProduct.module.scss";
-import { IProductInCart } from "../../../types/productInCart";
+import { IDisplayProduct } from "../../../types/product";
 
 type ProductProps = {
-  productInCart: IProductInCart;
+  productInCart: IDisplayProduct;
 };
 
 function CartProduct({ productInCart }: ProductProps) {
@@ -13,7 +13,7 @@ function CartProduct({ productInCart }: ProductProps) {
       </div>
       <div className={styles.productTitle}>{productInCart.name}</div>
       <div className={styles.productCount}>{productInCart.countInCart}</div>
-      <div className={styles.productPrice}>{productInCart.price} ₽</div>
+      <div className={styles.productPrice}>{productInCart.price}</div>
       <div className={styles.productControls}>
         <img src="/trash.png" alt="удалить" />
       </div>

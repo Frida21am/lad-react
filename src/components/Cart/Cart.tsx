@@ -1,9 +1,9 @@
 import styles from "./Cart.module.scss";
 import { CartProduct } from "../index";
-import { IProductInCart } from "../../types/productInCart";
+import { IDisplayProduct } from "../../types/product";
 
 type ProductInCartProps = {
-  productsInCart: IProductInCart[];
+  productsInCart: IDisplayProduct[];
 };
 
 function Cart({ productsInCart }: ProductInCartProps) {

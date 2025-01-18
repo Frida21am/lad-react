@@ -5,14 +5,14 @@ type ChangeCountProps = {
   productInCart: IProductInCart | undefined;
   onIncrement: () => void;
   onDecrement: () => void;
-  onChangeInput: (value: string) => void;
+  //onChangeInput: (value: string) => void;
 };
 
 function ProductCounter({
   productInCart,
   onIncrement,
   onDecrement,
-  onChangeInput,
+  //onChangeInput,
 }: ChangeCountProps) {
   return (
     <div className={styles.counter}>
@@ -31,9 +31,9 @@ function ProductCounter({
       <input
         className={styles.counterNumber}
         type="text"
-        onChange={(e) => {
-          onChangeInput(e.target.value);
-        }}
+        // onChange={(e) => {
+        //   onChangeInput(e.target.value);
+        // }}
         value={productInCart?.countInCart}
       />
       <button

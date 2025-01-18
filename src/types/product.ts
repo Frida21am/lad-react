@@ -5,6 +5,9 @@ export interface IProduct {
   price: number;
   discount?: number;
   rating: number;
+}
+
+export interface IDisplayProduct extends IProduct {
   isFavorite: boolean;
-  isAddedToCart: boolean;
+  countInCart: number;
 }
