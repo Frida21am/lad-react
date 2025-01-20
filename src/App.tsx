@@ -59,6 +59,23 @@ const App = () => {
     });
   };
 
+  const handleChangeCounter = (productId: number, value: number) => {
+    setProductsInCart((oldProducts) => {
+      // Получить текущий productInCart, на котором мы нажали Decrement
+      const productInCart = oldProducts.find((p) => p.id == productId);
+      // Если такой товар уже есть в корзине, то задать ему количество, которое мы ввели в инпут
+      if (productInCart) {
+        productInCart.countInCart = value;
+        // Если свойство countInCart в текущем productInCart достигнет 0, то удалить этот элемент из массива productsInCart
+        if (productInCart.countInCart == 0) {
+          return [...oldProducts.filter((p) => p.id != productId)];
+        }
+        return [...oldProducts];
+      }
+      return oldProducts;
+    });
+  };
+
   const handleAddToFavorite = (productId: number) => {
     setFavoriteProducts((oldProducts) => {
       // Добавить новый элемент в массив favoriteProduсts (нажата кнопка "Добавить в избранное")
@@ -98,6 +115,7 @@ const App = () => {
                 onAddToCart={handleAddToCart}
                 onRemoveFromCart={handleRemoveFromCart}
                 onDecreaseCounter={handleDecreaseCounter}
+                onChangeCounter={handleChangeCounter}
                 onAddToFavorite={handleAddToFavorite}
                 onRemoveFromFavorite={handleRemoveFromFavorite}
               />
@@ -106,7 +124,15 @@ const App = () => {
           <Route path="/about" element={<AboutPage />} />
           <Route
             path="/cart"
-            element={<CartPage productsInCart={displayProductsInCart} />}
+            element={
+              <CartPage
+                productsInCart={displayProductsInCart}
+                onAddToCart={handleAddToCart}
+                onDecreaseCounter={handleDecreaseCounter}
+                onRemoveFromCart={handleRemoveFromCart}
+                onChangeCounter={handleChangeCounter}
+              />
+            }
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

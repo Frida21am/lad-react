@@ -7,6 +7,7 @@ type ProductProps = {
   onAddToCart: (productId: number) => void;
   onRemoveFromCart: (productId: number) => void;
   onDecreaseCounter: (productId: number) => void;
+  onChangeCounter: (productId: number, value: number) => void;
   onAddToFavorite: (productId: number) => void;
   onRemoveFromFavorite: (productId: number) => void;
 };
@@ -15,9 +16,10 @@ function ProductCatalog({
   products,
   onAddToCart,
   onRemoveFromCart,
+  onDecreaseCounter,
+  onChangeCounter,
   onAddToFavorite,
   onRemoveFromFavorite,
-  onDecreaseCounter,
 }: ProductProps) {
   return (
     <div className={styles.products}>
@@ -28,6 +30,7 @@ function ProductCatalog({
           onAddToCart={onAddToCart}
           onRemoveFromCart={onRemoveFromCart}
           onDecreaseCounter={onDecreaseCounter}
+          onChangeCounter={onChangeCounter}
           onAddToFavorite={onAddToFavorite}
           onRemoveFromFavorite={onRemoveFromFavorite}
         />

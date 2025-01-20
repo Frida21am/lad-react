@@ -7,6 +7,7 @@ type ProductProps = {
   onAddToCart: (productId: number) => void;
   onRemoveFromCart: (productId: number) => void;
   onDecreaseCounter: (productId: number) => void;
+  onChangeCounter: (productId: number, value: number) => void;
   onAddToFavorite: (productId: number) => void;
   onRemoveFromFavorite: (productId: number) => void;
 };
@@ -15,9 +16,10 @@ const ProductCard = ({
   product,
   onAddToCart,
   onRemoveFromCart,
+  onDecreaseCounter,
+  onChangeCounter,
   onAddToFavorite,
   onRemoveFromFavorite,
-  onDecreaseCounter,
 }: ProductProps) => {
   return (
     <div className={styles.product}>
@@ -62,7 +64,7 @@ const ProductCard = ({
               productInCart={product}
               onIncrement={() => onAddToCart(product.id)}
               onDecrement={() => onDecreaseCounter(product.id)}
-              //onChangeInput={handleChangeInput}
+              onChangeInput={(value) => onChangeCounter(product.id, value)}
             />
           ) : null}
         </div>
