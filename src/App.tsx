@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useState } from "react";
+import { useImmerReducer } from "use-immer";
 import { data } from "./data";
+import { cartReducer } from "./cartReducer/reducer";
 import { IDisplayProduct, IProduct } from "./types/product";
-import { IProductInCart } from "./types/productInCart";
 import { IProductInFavorite } from "./types/productInFavorite";
 import { Layout, CatalogPage } from "./components/index";
 import CartPage from "./pages/CartPage";
@@ -11,68 +12,37 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   const [products] = useState<IProduct[]>(data);
-  const [productsInCart, setProductsInCart] = useState<IProductInCart[]>([]);
+  const [productsInCart, dispatch] = useImmerReducer(cartReducer, { cart: [] });
   const [favoriteProduсts, setFavoriteProducts] = useState<
     IProductInFavorite[]
   >([]);
 
   const handleAddToCart = (productId: number) => {
-    setProductsInCart((oldProducts) => {
-      // Получить текущий productInCart, на котором мы нажали "Добавить в корзину" или Increment
-      const productInCart = oldProducts.find((p) => p.id == productId);
-      // Если такой товар уже есть в корзине, то увеличить его количество на единицу (нажата кнопка Increment)
-      if (productInCart) {
-        productInCart.countInCart++;
-        return [...oldProducts];
-      }
-      // Если такого товара в корзине еще не было, то добавить к существующему массиву productsInCart новый объект
-      return [...oldProducts, { id: productId, countInCart: 1 }];
+    dispatch({
+      type: "ADD_PRODUCT_ITEM",
+      productId,
     });
   };
 
   const handleRemoveFromCart = (productId: number) => {
-    setProductsInCart((oldProducts) => {
-      // Получить текущий productInCart, на котором мы нажали "Убрать из корзины"
-      const productInCart = oldProducts.find((p) => p.id == productId);
-      // Если такой товар уже есть в корзине, то удалить его
-      if (productInCart) {
-        return [...oldProducts.filter((p) => p.id != productId)];
-      }
-      return oldProducts;
+    dispatch({
+      type: "REMOVE_ALL_PRODUCT_ITEMS",
+      productId,
     });
   };
 
   const handleDecreaseCounter = (productId: number) => {
-    setProductsInCart((oldProducts) => {
-      // Получить текущий productInCart, на котором мы нажали Decrement
-      const productInCart = oldProducts.find((p) => p.id == productId);
-      // Если такой товар уже есть в корзине, то уменьшить его количество на единицу
-      if (productInCart) {
-        productInCart.countInCart--;
-        // Если свойство countInCart в текущем productInCart достигнет 0, то удалить этот элемент из массива productsInCart
-        if (productInCart.countInCart == 0) {
-          return [...oldProducts.filter((p) => p.id != productId)];
-        }
-        return [...oldProducts];
-      }
-      return oldProducts;
+    dispatch({
+      type: "REMOVE_PRODUCT_ITEM",
+      productId,
     });
   };
 
   const handleChangeCounter = (productId: number, value: number) => {
-    setProductsInCart((oldProducts) => {
-      // Получить текущий productInCart, на котором мы нажали Decrement
-      const productInCart = oldProducts.find((p) => p.id == productId);
-      // Если такой товар уже есть в корзине, то задать ему количество, которое мы ввели в инпут
-      if (productInCart) {
-        productInCart.countInCart = value;
-        // Если свойство countInCart в текущем productInCart достигнет 0, то удалить этот элемент из массива productsInCart
-        if (productInCart.countInCart == 0) {
-          return [...oldProducts.filter((p) => p.id != productId)];
-        }
-        return [...oldProducts];
-      }
-      return oldProducts;
+    dispatch({
+      type: "SET_PRODUCT_ITEMS_COUNT",
+      productId,
+      count: value,
     });
   };
 
@@ -95,7 +65,7 @@ const App = () => {
     return {
       ...product,
       countInCart:
-        productsInCart.find((el) => el.id == product.id)?.countInCart ?? 0,
+        productsInCart.cart.find((el) => el.id == product.id)?.countInCart ?? 0,
       isFavorite: favoriteProduсts.some((el) => el.id == product.id),
     };
   });
@@ -105,7 +75,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Layout productsInCart={productsInCart}>
+      <Layout productsInCart={productsInCart.cart}>
         <Routes>
           <Route
             path="/"
