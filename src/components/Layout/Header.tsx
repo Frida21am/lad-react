@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
-import { Profile, ButtonCart } from "../../components/index";
+import { Profile, ButtonCart, ThemeChanger } from "../../components/index";
 import { IProductInCart } from "../../types/productInCart";
 
 type HeaderProps = {
@@ -26,6 +26,7 @@ function Header({ productsInCart }: HeaderProps) {
         <div className={styles.account}>
           <ButtonCart productsInCart={productsInCart} />
           {Boolean(isLoggedIn) && <Profile />}
+          <ThemeChanger />
         </div>
       </section>
     </div>

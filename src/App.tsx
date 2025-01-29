@@ -5,10 +5,13 @@ import { data } from "./data";
 import { cartReducer } from "./cartReducer/reducer";
 import { IDisplayProduct, IProduct } from "./types/product";
 import { IProductInFavorite } from "./types/productInFavorite";
-import { Layout, CatalogPage } from "./components/index";
-import CartPage from "./pages/CartPage";
-import AboutPage from "./pages/AboutPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import {
+  Layout,
+  CatalogPage,
+  CartPage,
+  AboutPage,
+  NotFoundPage,
+} from "./components/index";
 
 const App = () => {
   const [products] = useState<IProduct[]>(data);

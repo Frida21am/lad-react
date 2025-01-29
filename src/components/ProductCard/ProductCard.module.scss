@@ -1,6 +1,10 @@
+$color-light: #e1e1e1;
+$color-dark: #222222;
+$color-light-border: #cccccc;
+$color-dark-border: #454545;
+
 .product {
   padding-top: 30px;
-  border: 1px solid #cccccc;
   border-radius: 10px;
   position: relative;
   display: flex;
@@ -8,9 +12,24 @@
   align-items: center;
 }
 
+:global(.theme__light) {
+  .product {
+    background-color: #fff;
+    color: $color-dark;
+    border: 1px solid $color-light-border;
+  }
+}
+:global(.theme__dark) {
+  .product {
+    background-color: $color-dark;
+    color: $color-light;
+    border: 1px solid $color-dark-border;
+  }
+}
+
 .productImage {
   img {
-    width: 260px;
+    width: 230px;
     object-fit: cover;
   }
 }
@@ -38,7 +57,6 @@
   justify-content: space-between;
 }
 .productTitle {
-  color: #222;
   text-decoration: none;
   font-size: 19px;
   font-weight: 600;

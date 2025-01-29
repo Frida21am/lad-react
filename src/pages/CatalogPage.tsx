@@ -1,4 +1,4 @@
-import { Button, ProductCatalog } from "../components/index";
+import { ProductCatalog } from "../components/index";
 import { IDisplayProduct } from "../types/product";
 
 type ProductProps = {
@@ -31,7 +31,6 @@ const CatalogPage = ({
         onAddToFavorite={onAddToFavorite}
         onRemoveFromFavorite={onRemoveFromFavorite}
       />
-      <Button />
     </div>
   );
 };

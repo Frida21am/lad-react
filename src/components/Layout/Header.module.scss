@@ -1,4 +1,6 @@
 .header {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,6 +10,7 @@
 
 .account {
   display: flex;
+  align-items: center;
 }
 .menuList {
   display: flex;

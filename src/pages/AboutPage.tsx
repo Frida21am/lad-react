@@ -1,5 +1,11 @@
+import { AboutUs } from "../components/index";
+
 function AboutPage() {
-  return <div>Страница О нас</div>;
+  return (
+    <div>
+      <AboutUs />
+    </div>
+  );
 }
 
 export default AboutPage;
