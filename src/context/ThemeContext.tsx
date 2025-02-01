@@ -8,6 +8,6 @@ type ThemeContextType = {
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
-  theme: "light",
+  theme: (localStorage.getItem("app-theme") as ThemeType) || "light",
   setTheme: () => {},
 });
