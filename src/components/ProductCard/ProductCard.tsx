@@ -1,26 +1,17 @@
 import styles from "./ProductCard.module.scss";
 import { ProductCounter, ProductLike } from "../index";
 import { IDisplayProduct } from "../../types/product";
+import { useFavoriteContext } from "../../hooks/useFavoriteContext";
+import { useCartContext } from "../../hooks/useCartContext";
 
 type ProductProps = {
   product: IDisplayProduct;
-  onAddToCart: (productId: number) => void;
-  onRemoveFromCart: (productId: number) => void;
-  onDecreaseCounter: (productId: number) => void;
-  onChangeCounter: (productId: number, value: number) => void;
-  onAddToFavorite: (productId: number) => void;
-  onRemoveFromFavorite: (productId: number) => void;
 };
 
-const ProductCard = ({
-  product,
-  onAddToCart,
-  onRemoveFromCart,
-  onDecreaseCounter,
-  onChangeCounter,
-  onAddToFavorite,
-  onRemoveFromFavorite,
-}: ProductProps) => {
+const ProductCard = ({ product }: ProductProps) => {
+  const favoriteContext = useFavoriteContext();
+  const cartContext = useCartContext();
+
   return (
     <div className={styles.product}>
       <a href="#" className={styles.productImage}>
@@ -31,8 +22,8 @@ const ProductCard = ({
         isFavorite={product.isFavorite}
         onFavoriteClick={() =>
           product.isFavorite
-            ? onRemoveFromFavorite(product.id)
-            : onAddToFavorite(product.id)
+            ? favoriteContext.onRemoveFromFavorite(product.id)
+            : favoriteContext.onAddToFavorite(product.id)
         }
       />
       <div className={styles.productInfo}>
@@ -53,8 +44,8 @@ const ProductCard = ({
             }
             onClick={() =>
               product.countInCart
-                ? onRemoveFromCart(product.id)
-                : onAddToCart(product.id)
+                ? cartContext.onRemoveFromCart(product.id)
+                : cartContext.onAddToCart(product.id)
             }
           >
             {product.countInCart ? "Убрать из корзины" : "Добавить в корзину"}
@@ -62,9 +53,11 @@ const ProductCard = ({
           {product.countInCart ? (
             <ProductCounter
               productInCart={product}
-              onIncrement={() => onAddToCart(product.id)}
-              onDecrement={() => onDecreaseCounter(product.id)}
-              onChangeInput={(value) => onChangeCounter(product.id, value)}
+              onIncrement={() => cartContext.onAddToCart(product.id)}
+              onDecrement={() => cartContext.onDecreaseCounter(product.id)}
+              onChangeInput={(value) =>
+                cartContext.onChangeCounter(product.id, value)
+              }
             />
           ) : null}
         </div>

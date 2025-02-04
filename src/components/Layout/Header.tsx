@@ -1,13 +1,8 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 import { Profile, ButtonCart, ThemeChanger } from "../../components/index";
-import { IProductInCart } from "../../types/productInCart";
 
-type HeaderProps = {
-  productsInCart: IProductInCart[];
-};
-
-function Header({ productsInCart }: HeaderProps) {
+function Header() {
   const isLoggedIn = true;
 
   return (
@@ -24,7 +19,7 @@ function Header({ productsInCart }: HeaderProps) {
           </ul>
         </nav>
         <div className={styles.account}>
-          <ButtonCart productsInCart={productsInCart} />
+          <ButtonCart />
           {Boolean(isLoggedIn) && <Profile />}
           <ThemeChanger />
         </div>

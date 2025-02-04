@@ -1,11 +1,12 @@
 import { IProductInCart } from "../types/productInCart";
 
-export type CartState = {
-  cart: IProductInCart[];
-};
+export type CartState = { cart: IProductInCart[] };
 
 export type CartAction =
-  | { type: "ADD_PRODUCT_ITEM"; productId: number }
+  | {
+      type: "ADD_PRODUCT_ITEM";
+      productId: number;
+    }
   | {
       type: "REMOVE_ALL_PRODUCT_ITEMS";
       productId: number;

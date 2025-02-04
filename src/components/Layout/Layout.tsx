@@ -1,21 +1,19 @@
 import styles from "./Layout.module.scss";
 import { Header } from "../index";
-import { IProductInCart } from "../../types/productInCart";
 import { useThemeContext } from "../../hooks/useThemeContext";
 
-type HeaderProps = {
-  productsInCart: IProductInCart[];
+type LayoutProps = {
   children: React.ReactNode;
 };
 
-function Layout({ productsInCart, children }: HeaderProps) {
+function Layout({ children }: LayoutProps) {
   const { theme } = useThemeContext();
 
   return (
     <div className={`theme__${theme}`}>
       <div className={styles.wrapper}>
         <header>
-          <Header productsInCart={productsInCart} />
+          <Header />
         </header>
         <main>{children}</main>
       </div>

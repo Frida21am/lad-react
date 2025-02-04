@@ -4,19 +4,9 @@ import { IDisplayProduct } from "../../types/product";
 
 type ProductInCartProps = {
   productsInCart: IDisplayProduct[];
-  onAddToCart: (productId: number) => void;
-  onDecreaseCounter: (productId: number) => void;
-  onRemoveFromCart: (productId: number) => void;
-  onChangeCounter: (productId: number, value: number) => void;
 };
 
-function Cart({
-  productsInCart,
-  onAddToCart,
-  onDecreaseCounter,
-  onRemoveFromCart,
-  onChangeCounter,
-}: ProductInCartProps) {
+function Cart({ productsInCart }: ProductInCartProps) {
   const itemsInCart: number[] = [];
   productsInCart.forEach((p) => {
     for (let count = 0; count < p.countInCart; count++) {
@@ -36,14 +26,7 @@ function Cart({
       </section>
       {productsInCart.length ? (
         productsInCart.map((productInCart) => (
-          <CartProduct
-            key={productInCart.id}
-            productInCart={productInCart}
-            onAddToCart={onAddToCart}
-            onDecreaseCounter={onDecreaseCounter}
-            onRemoveFromCart={onRemoveFromCart}
-            onChangeCounter={onChangeCounter}
-          />
+          <CartProduct key={productInCart.id} productInCart={productInCart} />
         ))
       ) : (
         <h3 className={styles.cartEmpty}>Нет товаров в корзине</h3>

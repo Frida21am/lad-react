@@ -4,28 +4,24 @@ import { IProductInCart } from "../types/productInCart";
 
 export const cartReducer: ImmerReducer<CartState, CartAction> = (
   draft,
-  action: CartAction,
+  action,
 ) => {
   switch (action.type) {
     case "ADD_PRODUCT_ITEM":
-      draft.cart = handleAddToCart(draft.cart, action.productId);
+      draft.cart = onAddToCart(draft.cart, action.productId);
       break;
     case "REMOVE_PRODUCT_ITEM":
-      draft.cart = handleDecreaseCounter(draft.cart, action.productId);
+      draft.cart = onDecreaseCounter(draft.cart, action.productId);
       break;
     case "REMOVE_ALL_PRODUCT_ITEMS":
-      draft.cart = handleRemoveFromCart(draft.cart, action.productId);
+      draft.cart = onRemoveFromCart(draft.cart, action.productId);
       break;
     case "SET_PRODUCT_ITEMS_COUNT":
-      draft.cart = handleChangeCounter(
-        draft.cart,
-        action.productId,
-        action.count,
-      );
+      draft.cart = onChangeCounter(draft.cart, action.productId, action.count);
   }
 };
 
-const handleAddToCart = (oldProducts: IProductInCart[], productId: number) => {
+const onAddToCart = (oldProducts: IProductInCart[], productId: number) => {
   // Получить текущий productInCart, на котором мы нажали "Добавить в корзину" или Increment
   const productInCart = oldProducts.find((p) => p.id == productId);
   // Если такой товар уже есть в корзине, то увеличить его количество на единицу (нажата кнопка Increment)
@@ -37,10 +33,7 @@ const handleAddToCart = (oldProducts: IProductInCart[], productId: number) => {
   return [...oldProducts, { id: productId, countInCart: 1 }];
 };
 
-const handleRemoveFromCart = (
-  oldProducts: IProductInCart[],
-  productId: number,
-) => {
+const onRemoveFromCart = (oldProducts: IProductInCart[], productId: number) => {
   // Получить текущий productInCart, на котором мы нажали "Убрать из корзины"
   const productInCart = oldProducts.find((p) => p.id == productId);
   // Если такой товар уже есть в корзине, то удалить его
@@ -50,7 +43,7 @@ const handleRemoveFromCart = (
   return oldProducts;
 };
 
-const handleDecreaseCounter = (
+const onDecreaseCounter = (
   oldProducts: IProductInCart[],
   productId: number,
 ) => {
@@ -68,7 +61,7 @@ const handleDecreaseCounter = (
   return oldProducts;
 };
 
-const handleChangeCounter = (
+const onChangeCounter = (
   oldProducts: IProductInCart[],
   productId: number,
   value: number,

@@ -1,22 +1,14 @@
 import styles from "./CartProduct.module.scss";
 import { IDisplayProduct } from "../../../types/product";
 import { ProductCounter } from "../../index";
+import { useCartContext } from "../../../hooks/useCartContext";
 
 type ProductProps = {
   productInCart: IDisplayProduct;
-  onAddToCart: (productId: number) => void;
-  onDecreaseCounter: (productId: number) => void;
-  onRemoveFromCart: (productId: number) => void;
-  onChangeCounter: (productId: number, value: number) => void;
 };
 
-function CartProduct({
-  productInCart,
-  onAddToCart,
-  onDecreaseCounter,
-  onRemoveFromCart,
-  onChangeCounter,
-}: ProductProps) {
+function CartProduct({ productInCart }: ProductProps) {
+  const cartContext = useCartContext();
   return (
     <div className={styles.product}>
       <div className={styles.productImg}>
@@ -26,9 +18,11 @@ function CartProduct({
       <div className={styles.productCount}>
         <ProductCounter
           productInCart={productInCart}
-          onIncrement={() => onAddToCart(productInCart.id)}
-          onDecrement={() => onDecreaseCounter(productInCart.id)}
-          onChangeInput={(value) => onChangeCounter(productInCart.id, value)}
+          onIncrement={() => cartContext.onAddToCart(productInCart.id)}
+          onDecrement={() => cartContext.onDecreaseCounter(productInCart.id)}
+          onChangeInput={(value) =>
+            cartContext.onChangeCounter(productInCart.id, value)
+          }
         />
       </div>
       <div className={styles.productPrice}>{productInCart.price}</div>
@@ -36,7 +30,7 @@ function CartProduct({
         <img
           src="/trash.png"
           alt="удалить"
-          onClick={() => onRemoveFromCart(productInCart.id)}
+          onClick={() => cartContext.onRemoveFromCart(productInCart.id)}
         />
       </div>
     </div>

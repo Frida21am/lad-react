@@ -13,8 +13,3 @@ export { default as Profile } from "./Profile/Profile";
 export { default as ThemeChanger } from "./ThemeChanger/ThemeChanger";
 export { default as ThemeIconLight } from "./ThemeChanger/components/ThemeIconLight/ThemeIconLight";
 export { default as ThemeIconDark } from "./ThemeChanger/components/ThemeIconDark/ThemeIconDark";
-
-export { default as AboutPage } from "../pages/AboutPage";
-export { default as CatalogPage } from "../pages/CatalogPage";
-export { default as CartPage } from "../pages/CartPage";
-export { default as NotFoundPage } from "../pages/NotFoundPage";
