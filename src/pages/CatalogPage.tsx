@@ -1,14 +1,9 @@
 import { ProductCatalog } from "../components/index";
-import { IDisplayProduct } from "../types/product";
 
-type ProductProps = {
-  products: IDisplayProduct[];
-};
-
-const CatalogPage = ({ products }: ProductProps) => {
+const CatalogPage = () => {
   return (
     <div className="container">
-      <ProductCatalog products={products} />
+      <ProductCatalog />
     </div>
   );
 };

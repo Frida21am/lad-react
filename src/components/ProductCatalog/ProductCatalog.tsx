@@ -1,18 +1,18 @@
 import styles from "./ProductCatalog.module.scss";
 import { ProductCard } from "../index";
-import { IDisplayProduct } from "../../types/product";
+import { useProductsContext } from "../../hooks/useProductsContext";
 
-type ProductProps = {
-  products: IDisplayProduct[];
-};
+function ProductCatalog() {
+  const { displayProducts } = useProductsContext();
 
-function ProductCatalog({ products }: ProductProps) {
   return (
-    <div className={styles.products}>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </div>
+    <>
+      <div className={styles.products}>
+        {displayProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </>
   );
 }
 

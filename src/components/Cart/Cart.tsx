@@ -1,14 +1,12 @@
 import styles from "./Cart.module.scss";
 import { CartProduct } from "../index";
-import { IDisplayProduct } from "../../types/product";
+import { useProductsContext } from "../../hooks/useProductsContext";
 
-type ProductInCartProps = {
-  productsInCart: IDisplayProduct[];
-};
+function Cart() {
+  const { displayProductsInCart } = useProductsContext();
 
-function Cart({ productsInCart }: ProductInCartProps) {
   const itemsInCart: number[] = [];
-  productsInCart.forEach((p) => {
+  displayProductsInCart.forEach((p) => {
     for (let count = 0; count < p.countInCart; count++) {
       itemsInCart.push(p.price);
     }
@@ -24,8 +22,8 @@ function Cart({ productsInCart }: ProductInCartProps) {
         <div className={styles.cartHeaderCount}>количество</div>
         <div className={styles.cartHeaderCost}>стоимость</div>
       </section>
-      {productsInCart.length ? (
-        productsInCart.map((productInCart) => (
+      {displayProductsInCart.length ? (
+        displayProductsInCart.map((productInCart) => (
           <CartProduct key={productInCart.id} productInCart={productInCart} />
         ))
       ) : (
@@ -33,7 +31,7 @@ function Cart({ productsInCart }: ProductInCartProps) {
       )}
       <section className={styles.cartFooter}>
         <div className={styles.cartFooterCount}>
-          {productsInCart.length} ед.
+          {displayProductsInCart.length} ед.
         </div>
         <div className={styles.cartFooterPrice}>{sumOfPrices} руб.</div>
       </section>
