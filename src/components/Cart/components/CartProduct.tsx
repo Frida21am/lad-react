@@ -12,9 +12,9 @@ function CartProduct({ productInCart }: ProductProps) {
   return (
     <div className={styles.product}>
       <div className={styles.productImg}>
-        <img src={productInCart.imageUrl} alt="product" />
+        <img src={productInCart.images[0]} alt="product" />
       </div>
-      <div className={styles.productTitle}>{productInCart.name}</div>
+      <div className={styles.productTitle}>{productInCart.title}</div>
       <div className={styles.productCount}>
         <ProductCounter
           productInCart={productInCart}

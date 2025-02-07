@@ -15,7 +15,7 @@ const ProductCard = ({ product }: ProductProps) => {
   return (
     <div className={styles.product}>
       <a href="#" className={styles.productImage}>
-        <img src={product.imageUrl} alt="" />
+        <img src={product.images[0]} alt="" />
       </a>
       <div className={styles.productRating}>{product.rating}</div>
       <ProductLike
@@ -27,11 +27,11 @@ const ProductCard = ({ product }: ProductProps) => {
         }
       />
       <div className={styles.productInfo}>
-        <h2 className={styles.productTitle}>{product.name}</h2>
+        <h2 className={styles.productTitle}>{product.title}</h2>
         <div className={styles.productPrice}>
           <span className={styles.productPriceValue}>{product.price} ₽</span>
           <span className={styles.productPriceDiscount}>
-            {product.discount}%
+            {product.discountPercentage}%
           </span>
         </div>
         <div className={styles.productButtons}>

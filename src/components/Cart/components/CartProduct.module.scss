@@ -21,7 +21,8 @@ $mobile-xs: 400px;
 
 .productImg {
   justify-self: center;
-  width: 45px;
+  width: 65px;
+  height: 65px;
   @media (max-width: $mobile) {
     grid-column: 1/3;
   }

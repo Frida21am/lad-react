@@ -1,10 +1,10 @@
 export interface IProduct {
   id: number;
-  name: string;
-  imageUrl: string;
+  title: string;
   price: number;
-  discount?: number;
+  discountPercentage?: number;
   rating: number;
+  images: string[];
 }
 
 export interface IDisplayProduct extends IProduct {

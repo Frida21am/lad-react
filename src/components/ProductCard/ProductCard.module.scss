@@ -29,8 +29,9 @@ $color-dark-border: #454545;
 
 .productImage {
   img {
-    width: 230px;
-    object-fit: cover;
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
   }
 }
 .productRating {

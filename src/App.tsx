@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
-import { data } from "./data";
 import { IDisplayProduct, IProduct } from "./types/product";
 import { useFavoriteContext } from "./hooks/useFavoriteContext";
 import { useCartContext } from "./hooks/useCartContext";
@@ -9,9 +8,24 @@ import AboutPage from "./pages/AboutPage";
 import CartPage from "./pages/CartPage";
 import CatalogPage from "./pages/CatalogPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import { getProducts } from "./services/products";
 
 const App = () => {
-  const [products] = useState<IProduct[]>(data);
+  const [products, setProducts] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const { data } = await getProducts();
+        setProducts(data.products);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        }
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const favoriteContext = useFavoriteContext();
   const cartContext = useCartContext();
