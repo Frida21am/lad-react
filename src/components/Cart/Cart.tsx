@@ -3,10 +3,10 @@ import { CartProduct } from "../index";
 import { useProductsContext } from "../../hooks/useProductsContext";
 
 function Cart() {
-  const { displayProductsInCart } = useProductsContext();
+  const productsContext = useProductsContext();
 
   const itemsInCart: number[] = [];
-  displayProductsInCart.forEach((p) => {
+  productsContext.displayProductsInCart.forEach((p) => {
     for (let count = 0; count < p.countInCart; count++) {
       itemsInCart.push(p.price);
     }
@@ -22,8 +22,8 @@ function Cart() {
         <div className={styles.cartHeaderCount}>количество</div>
         <div className={styles.cartHeaderCost}>стоимость</div>
       </section>
-      {displayProductsInCart.length ? (
-        displayProductsInCart.map((productInCart) => (
+      {productsContext.displayProductsInCart.length ? (
+        productsContext.displayProductsInCart.map((productInCart) => (
           <CartProduct key={productInCart.id} productInCart={productInCart} />
         ))
       ) : (
@@ -31,7 +31,7 @@ function Cart() {
       )}
       <section className={styles.cartFooter}>
         <div className={styles.cartFooterCount}>
-          {displayProductsInCart.length} ед.
+          {productsContext.displayProductsInCart.length} ед.
         </div>
         <div className={styles.cartFooterPrice}>{sumOfPrices} руб.</div>
       </section>

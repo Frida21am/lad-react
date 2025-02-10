@@ -8,10 +8,12 @@ interface IProductsData {
   limit: number;
 }
 
-export const getProducts = () => {
-  return api.get<IProductsData>("/products");
+export const getProducts = async () => {
+  const { data } = await api.get<IProductsData>("/products");
+  return data.products;
 };
 
-export const getProduct = (id: number) => {
-  return api.get<IProduct>(`/products${id}`);
+export const getProduct = async (id: number) => {
+  const { data } = await api.get<IProduct>(`/products${id}`);
+  return data;
 };

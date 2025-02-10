@@ -1,23 +1,19 @@
-import { useState } from "react";
-import { IProduct } from "../types/product";
 import { getProducts } from "../services/products";
+import { useQuery } from "@tanstack/react-query";
 
 function useGetProducts() {
-  const [products, setProducts] = useState<IProduct[]>([]);
-
-  const fetchProducts = async () => {
-    try {
-      const { data } = await getProducts();
-      setProducts(data.products);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      }
-    }
-  };
-  fetchProducts();
-
-  return products;
+  const {
+    data: products,
+    error,
+    isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+    retry: 3,
+    retryDelay: 1000,
+  });
+  return { products, isLoading, isError, error };
 }
 
 export default useGetProducts;

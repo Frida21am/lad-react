@@ -9,29 +9,34 @@ type ProductsProviderProps = {
 };
 
 const ProductsProvider = ({ children }: ProductsProviderProps) => {
-  const products = useGetProducts();
+  const { products, isLoading, isError, error } = useGetProducts();
   const favoriteContext = useFavoriteContext();
   const cartContext = useCartContext();
 
   // Добавляем к product дополнительные свойства countInCart и isFavorite, и собираем это в отдельном массиве displayProducts
-  const displayProducts: IDisplayProduct[] = products.map((product) => {
-    return {
-      ...product,
-      countInCart:
-        cartContext.productsInCart.cart.find((el) => el.id == product.id)
-          ?.countInCart ?? 0,
-      isFavorite: favoriteContext.favoriteProduсts.some(
-        (el) => el.id == product.id,
-      ),
-    };
-  });
-  const displayProductsInCart = displayProducts.filter(
+  const displayProducts: IDisplayProduct[] | undefined = products?.map(
+    (product) => {
+      return {
+        ...product,
+        countInCart:
+          cartContext.productsInCart.cart.find((el) => el.id == product.id)
+            ?.countInCart ?? 0,
+        isFavorite: favoriteContext.favoriteProduсts.some(
+          (el) => el.id == product.id,
+        ),
+      };
+    },
+  );
+  const displayProductsInCart = displayProducts?.filter(
     (product) => product.countInCart > 0,
   );
 
   const value = {
     displayProducts,
     displayProductsInCart,
+    isLoading,
+    isError,
+    error,
   };
 
   return (
