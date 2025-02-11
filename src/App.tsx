@@ -4,6 +4,7 @@ import AboutPage from "./pages/AboutPage";
 import CartPage from "./pages/CartPage";
 import CatalogPage from "./pages/CatalogPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import BlogPage from "./pages/BlogPage";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<CatalogPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog" element={<BlogPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

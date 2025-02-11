@@ -16,6 +16,9 @@ function Header() {
             <li>
               <NavLink to="/about">О нас</NavLink>
             </li>
+            <li>
+              <NavLink to="/blog">Наш блог</NavLink>
+            </li>
           </ul>
         </nav>
         <div className={styles.account}>
