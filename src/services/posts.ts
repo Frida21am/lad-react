@@ -14,6 +14,6 @@ export const getPosts = async () => {
 };
 
 export const getPost = async (id: number) => {
-  const { data } = await api.get<IPost>(`/posts${id}`);
+  const { data } = await api.get<IPost>(`/posts/${id}`);
   return data;
 };

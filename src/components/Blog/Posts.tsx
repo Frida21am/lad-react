@@ -1,13 +1,13 @@
-import { usePostsContext } from "../../hooks/usePostsContext";
+import useGetPosts from "../../hooks/useGetPosts";
 import styles from "./Posts.module.scss";
 import Post from "./components/Post";
 
 function Posts() {
-  const postsContext = usePostsContext();
+  const data = useGetPosts();
 
   return (
     <div className={styles.posts}>
-      {postsContext.posts?.map((el) => <Post key={el.id} post={el} />)}
+      {data.posts?.map((el) => <Post key={el.id} post={el} />)}
     </div>
   );
 }

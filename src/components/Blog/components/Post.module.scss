@@ -3,7 +3,6 @@
   margin: 0 auto 20px auto;
   padding: 20px;
   border-radius: 10px;
-  background-color: var(--background-color-of-post);
 }
 
 //.postContent {}
@@ -49,8 +48,6 @@
 }
 .postTags {
   span {
-    background-color: var(--background-color-of-tags);
-    color: var(--text-color-of-tags);
     display: inline-block;
     padding: 2px 8px;
     margin-right: 10px;
@@ -85,5 +82,28 @@
   color: #00696b;
   &:hover {
     text-decoration: underline;
+  }
+}
+
+:global(.theme__light) {
+  .post {
+    background-color: #f4fbfa;
+    .postTags {
+      span {
+        background-color: #4a6363;
+        color: #fff;
+      }
+    }
+  }
+}
+:global(.theme__dark) {
+  .post {
+    background-color: #0e1415;
+  }
+  .postTags {
+    span {
+      background-color: #b0cccc;
+      color: #1b3435;
+    }
   }
 }

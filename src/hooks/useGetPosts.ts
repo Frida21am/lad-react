@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { getPosts } from "../services/posts";
+import { useQuery } from "@tanstack/react-query";
 
 function useGetPosts() {
   const {

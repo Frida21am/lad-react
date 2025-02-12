@@ -8,7 +8,6 @@ import ThemeProvider from "./context/ThemeProvider";
 import ProductsProvider from "./context/ProductsProvider";
 import FavoriteProvider from "./context/FavoriteProvider";
 import CartProvider from "./context/CartProvider";
-import PostsProvider from "./context/PostsProvider";
 
 const queryClient = new QueryClient();
 
@@ -19,9 +18,7 @@ createRoot(document.getElementById("root")!).render(
         <ProductsProvider>
           <FavoriteProvider>
             <CartProvider>
-              <PostsProvider>
-                <App />
-              </PostsProvider>
+              <App />
             </CartProvider>
           </FavoriteProvider>
         </ProductsProvider>

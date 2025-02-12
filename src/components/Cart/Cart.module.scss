@@ -23,16 +23,6 @@ $mobile-xs: 400px;
     }
   }
 }
-:global(.theme__light) {
-  .cartHeader {
-    background-color: #eaeff2;
-  }
-}
-:global(.theme__dark) {
-  .cartHeader {
-    background-color: #333640;
-  }
-}
 
 .cartHeaderTitle {
   grid-column-start: 2;
@@ -57,17 +47,6 @@ $mobile-xs: 400px;
   }
 }
 
-:global(.theme__light) {
-  .cartFooter {
-    background-color: #eaeff2;
-  }
-}
-:global(.theme__dark) {
-  .cartFooter {
-    background-color: #333640;
-  }
-}
-
 .cartFooterCount {
   grid-column-start: 3;
   @media (max-width: $mobile) {
@@ -79,4 +58,21 @@ $mobile-xs: 400px;
   text-align: center;
   font-size: 21px;
   margin: 30px 0;
+}
+
+:global(.theme__light) {
+  .cartHeader {
+    background-color: #eaeff2;
+  }
+  .cartFooter {
+    background-color: #eaeff2;
+  }
+}
+:global(.theme__dark) {
+  .cartHeader {
+    background-color: #333640;
+  }
+  .cartFooter {
+    background-color: #333640;
+  }
 }

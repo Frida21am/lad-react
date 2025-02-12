@@ -1,20 +1,22 @@
 import { Link } from "react-router-dom";
 import styles from "./Post.module.scss";
 import { IPost } from "../../../types/post";
+import useGetUser from "../../../hooks/useGetUser";
 
 interface Props {
   post: IPost;
 }
 
 function Post({ post }: Props) {
+  const userData = useGetUser(post.userId);
+
   return (
     <div className={styles.post}>
       <div className={styles.postContent}>
         <div className={styles.postUser}>
           <div className={styles.postUserAvatar}>
-            {/* <img src={user.image} alt="avatar" width={44} height={44} /> */}
             <img
-              src="https://dummyjson.com/icon/emilys/128"
+              src={userData?.user?.image}
               alt="avatar"
               width={44}
               height={44}
@@ -22,12 +24,10 @@ function Post({ post }: Props) {
           </div>
           <div className={styles.postUserName}>
             <span className={styles.postUserFullname}>
-              {/* {user.firstName} {user.lastName} */}
-              Emily Johnson
+              {userData?.user?.firstName} {userData?.user?.lastName}
             </span>
             <Link to="/" className={styles.postUserUsername}>
-              {/* @{user.username} */}
-              @emilys
+              @{userData?.user?.username}
             </Link>
           </div>
         </div>

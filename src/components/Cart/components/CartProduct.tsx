@@ -9,6 +9,7 @@ type ProductProps = {
 
 function CartProduct({ productInCart }: ProductProps) {
   const cartContext = useCartContext();
+
   return (
     <div className={styles.product}>
       <div className={styles.productImg}>
