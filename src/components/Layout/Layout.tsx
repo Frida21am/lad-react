@@ -1,6 +1,6 @@
 import styles from "./Layout.module.scss";
-import { Header } from "../index";
 import { useThemeContext } from "../../hooks/useThemeContext";
+import Header from "./Header";
 
 type LayoutProps = {
   children: React.ReactNode;

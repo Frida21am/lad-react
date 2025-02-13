@@ -1,16 +1,26 @@
 import styles from "./Cart.module.scss";
-import { CartProduct } from "../index";
-import { useProductsContext } from "../../hooks/useProductsContext";
+import { useCartContext } from "../../hooks/useCartContext";
+import useGetProducts from "../../hooks/useGetProducts";
+import CartProduct from "./components/CartProduct";
 
 function Cart() {
-  const productsContext = useProductsContext();
+  const productsInCart = useCartContext().productsInCart.cart;
+  const products = useGetProducts().products;
+
+  const arrayOfIds = productsInCart.map((p) => p.id);
+
+  const filteredProducts = products?.filter((p) => arrayOfIds.includes(p.id));
 
   const itemsInCart: number[] = [];
-  productsContext?.displayProductsInCart?.forEach((p) => {
+  productsInCart.forEach((p) => {
     for (let count = 0; count < p.countInCart; count++) {
-      itemsInCart.push(p.price);
+      const curProduct = filteredProducts?.find(
+        (product) => product.id === p.id,
+      );
+      itemsInCart.push(curProduct ? curProduct.price : 0);
     }
   });
+
   const sumOfPrices: number = itemsInCart.reduce(function (a, b) {
     return a + b;
   }, 0);
@@ -22,18 +32,22 @@ function Cart() {
         <div className={styles.cartHeaderCount}>количество</div>
         <div className={styles.cartHeaderCost}>стоимость</div>
       </section>
-      {productsContext?.displayProductsInCart?.length ? (
-        productsContext.displayProductsInCart.map((productInCart) => (
-          <CartProduct key={productInCart.id} productInCart={productInCart} />
+      {productsInCart.length ? (
+        productsInCart.map((productInCart) => (
+          <CartProduct
+            key={productInCart.id}
+            filteredProducts={filteredProducts}
+            productInCart={productInCart}
+          />
         ))
       ) : (
         <h3 className={styles.cartEmpty}>Нет товаров в корзине</h3>
       )}
       <section className={styles.cartFooter}>
         <div className={styles.cartFooterCount}>
-          {productsContext?.displayProductsInCart?.length} ед.
+          {productsInCart.length} ед.
         </div>
-        <div className={styles.cartFooterPrice}>{sumOfPrices} руб.</div>
+        <div className={styles.cartFooterPrice}>{sumOfPrices.toFixed(2)} $</div>
       </section>
     </section>
   );

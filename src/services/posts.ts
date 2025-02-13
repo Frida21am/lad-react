@@ -8,12 +8,12 @@ interface IPostsData {
   limit: number;
 }
 
-export const getPosts = async () => {
+export const fetchPosts = async () => {
   const { data } = await api.get<IPostsData>("/posts");
   return data.posts;
 };
 
-export const getPost = async (id: number) => {
+export const fetchPost = async (id: number) => {
   const { data } = await api.get<IPost>(`/posts/${id}`);
   return data;
 };

@@ -6,8 +6,3 @@ export interface IProduct {
   rating: number;
   images: string[];
 }
-
-export interface IDisplayProduct extends IProduct {
-  isFavorite: boolean;
-  countInCart: number;
-}

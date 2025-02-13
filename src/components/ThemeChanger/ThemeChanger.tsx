@@ -1,7 +1,8 @@
+import { useLayoutEffect } from "react";
 import styles from "./ThemeChanger.module.scss";
 import { useThemeContext } from "../../hooks/useThemeContext";
-import { ThemeIconLight, ThemeIconDark } from "../index";
-import { useLayoutEffect } from "react";
+import ThemeIconDark from "./components/ThemeIconDark/ThemeIconDark";
+import ThemeIconLight from "./components/ThemeIconLight/ThemeIconLight";
 
 const ThemeChanger = () => {
   const { theme, setTheme } = useThemeContext();

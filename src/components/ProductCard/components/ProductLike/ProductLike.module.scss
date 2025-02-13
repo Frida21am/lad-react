@@ -5,10 +5,6 @@
   width: 45px;
   height: 45px;
   z-index: 9;
-  border-color: transparent;
-  border: 1px solid #e4e4e4;
-  border-width: unset;
-  background: #fff;
   border-radius: 100%;
   display: inline-flex;
   justify-content: center;
@@ -55,5 +51,23 @@
   100% {
     transform: scale(1);
     animation-timing-function: ease-out;
+  }
+}
+
+$color-light: #e1e1e1;
+$color-dark: #222222;
+$color-light-border: #cccccc;
+$color-dark-border: #454545;
+
+:global(.theme__light) {
+  .productLike {
+    background: #fff;
+    border: 1px solid $color-light-border;
+  }
+}
+:global(.theme__dark) {
+  .productLike {
+    background: $color-dark;
+    border: 1px solid $color-dark-border;
   }
 }

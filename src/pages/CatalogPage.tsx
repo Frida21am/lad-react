@@ -1,4 +1,4 @@
-import { ProductCatalog } from "../components/index";
+import ProductCatalog from "../components/ProductCatalog/ProductCatalog";
 
 const CatalogPage = () => {
   return (

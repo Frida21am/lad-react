@@ -1,5 +1,5 @@
-import useGetPosts from "../../hooks/useGetPosts";
 import styles from "./Posts.module.scss";
+import useGetPosts from "../../hooks/useGetPosts";
 import Post from "./components/Post";
 
 function Posts() {

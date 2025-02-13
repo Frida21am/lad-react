@@ -1,25 +1,20 @@
 import styles from "./ProductCounter.module.scss";
 import { IProductInCart } from "../../../../types/productInCart";
+import { useCartContext } from "../../../../hooks/useCartContext";
 
 type ChangeCountProps = {
-  productInCart: IProductInCart | undefined;
-  onIncrement: () => void;
-  onDecrement: () => void;
-  onChangeInput: (value: number) => void;
+  productInCart: IProductInCart;
 };
 
-function ProductCounter({
-  productInCart,
-  onIncrement,
-  onDecrement,
-  onChangeInput,
-}: ChangeCountProps) {
+function ProductCounter({ productInCart }: ChangeCountProps) {
+  const cartContext = useCartContext();
+
   return (
     <div className={styles.counter}>
       <button
         className={styles.counterButton}
         type="button"
-        onClick={onDecrement}
+        onClick={() => cartContext.onDecreaseCounter(productInCart.id)}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
           <path
@@ -32,15 +27,14 @@ function ProductCounter({
         className={styles.counterNumber}
         type="text"
         onChange={(e) => {
-          onChangeInput(+e.target.value);
+          cartContext.onChangeCounter(productInCart.id, +e.target.value);
         }}
-        defaultValue={productInCart?.countInCart}
         value={productInCart?.countInCart}
       />
       <button
         className={styles.counterButton}
         type="button"
-        onClick={onIncrement}
+        onClick={() => cartContext.onAddToCart(productInCart.id)}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
           <path

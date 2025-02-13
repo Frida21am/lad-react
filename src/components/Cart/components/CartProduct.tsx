@@ -1,37 +1,35 @@
 import styles from "./CartProduct.module.scss";
-import { IDisplayProduct } from "../../../types/product";
-import { ProductCounter } from "../../index";
 import { useCartContext } from "../../../hooks/useCartContext";
+import { IProductInCart } from "../../../types/productInCart";
+import { IProduct } from "../../../types/product";
+import ProductCounter from "../../ProductCard/components/ProductCounter/ProductCounter";
 
 type ProductProps = {
-  productInCart: IDisplayProduct;
+  filteredProducts: IProduct[] | undefined;
+  productInCart: IProductInCart;
 };
 
-function CartProduct({ productInCart }: ProductProps) {
-  const cartContext = useCartContext();
+function CartProduct({ filteredProducts, productInCart }: ProductProps) {
+  const { onRemoveFromCart } = useCartContext();
+  const currentProduct = filteredProducts?.find(
+    (p) => p.id === productInCart.id,
+  );
 
   return (
     <div className={styles.product}>
       <div className={styles.productImg}>
-        <img src={productInCart.images[0]} alt="product" />
+        <img src={currentProduct?.images[0]} alt="product" />
       </div>
-      <div className={styles.productTitle}>{productInCart.title}</div>
+      <div className={styles.productTitle}>{currentProduct?.title}</div>
       <div className={styles.productCount}>
-        <ProductCounter
-          productInCart={productInCart}
-          onIncrement={() => cartContext.onAddToCart(productInCart.id)}
-          onDecrement={() => cartContext.onDecreaseCounter(productInCart.id)}
-          onChangeInput={(value) =>
-            cartContext.onChangeCounter(productInCart.id, value)
-          }
-        />
+        <ProductCounter productInCart={productInCart} />
       </div>
-      <div className={styles.productPrice}>{productInCart.price}</div>
+      <div className={styles.productPrice}>{currentProduct?.price} $</div>
       <div className={styles.productControls}>
         <img
           src="/trash.png"
           alt="удалить"
-          onClick={() => cartContext.onRemoveFromCart(productInCart.id)}
+          onClick={() => onRemoveFromCart(productInCart.id)}
         />
       </div>
     </div>

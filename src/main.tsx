@@ -5,7 +5,6 @@ import "./null.scss";
 import "./styles.scss";
 import App from "./App";
 import ThemeProvider from "./context/ThemeProvider";
-import ProductsProvider from "./context/ProductsProvider";
 import FavoriteProvider from "./context/FavoriteProvider";
 import CartProvider from "./context/CartProvider";
 
@@ -15,13 +14,11 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <ProductsProvider>
-          <FavoriteProvider>
-            <CartProvider>
-              <App />
-            </CartProvider>
-          </FavoriteProvider>
-        </ProductsProvider>
+        <FavoriteProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </FavoriteProvider>
       </ThemeProvider>
     </QueryClientProvider>
     ,

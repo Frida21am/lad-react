@@ -1,5 +1,5 @@
-import { getPosts } from "../services/posts";
 import { useQuery } from "@tanstack/react-query";
+import { fetchPosts } from "../services/posts";
 
 function useGetPosts() {
   const {
@@ -9,7 +9,7 @@ function useGetPosts() {
     isLoading,
   } = useQuery({
     queryKey: ["posts"],
-    queryFn: getPosts,
+    queryFn: fetchPosts,
     retry: 3,
     retryDelay: 1000,
   });

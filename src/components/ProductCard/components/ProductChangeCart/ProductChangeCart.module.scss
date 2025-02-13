@@ -1,0 +1,27 @@
+.productButtons {
+  display: flex;
+  margin: 0 auto;
+}
+
+.productButton {
+  width: 260px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: #0e4289ee;
+  color: #fff;
+  transition: color 0.1s ease;
+  cursor: pointer;
+  &:hover {
+    color: #dbdbdbee;
+  }
+}
+.active {
+  width: 100px;
+}

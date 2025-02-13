@@ -1,11 +1,16 @@
 import styles from "./ProductLike.module.scss";
+import { useFavoriteContext } from "../../../../hooks/useFavoriteContext";
 
 type ChangeFavoriteProps = {
-  isFavorite: boolean;
-  onFavoriteClick: () => void;
+  productId: number;
 };
 
-function ProductLike({ isFavorite, onFavoriteClick }: ChangeFavoriteProps) {
+function ProductLike({ productId }: ChangeFavoriteProps) {
+  const favoriteContext = useFavoriteContext();
+  const isFavorite = favoriteContext.favoriteProduсts.some(
+    (favoriteProduct) => favoriteProduct.id == productId,
+  );
+
   return (
     <div
       className={
@@ -13,7 +18,11 @@ function ProductLike({ isFavorite, onFavoriteClick }: ChangeFavoriteProps) {
           ? `${styles.productLike} + ${styles.active}`
           : styles.productLike
       }
-      onClick={onFavoriteClick}
+      onClick={() =>
+        isFavorite
+          ? favoriteContext.onRemoveFromFavorite(productId)
+          : favoriteContext.onAddToFavorite(productId)
+      }
     >
       <svg
         width="21"

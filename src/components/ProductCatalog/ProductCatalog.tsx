@@ -1,19 +1,19 @@
 import styles from "./ProductCatalog.module.scss";
-import { ProductCard } from "../index";
-import { useProductsContext } from "../../hooks/useProductsContext";
+import useGetProducts from "../../hooks/useGetProducts";
+import ProductCard from "../ProductCard/ProductCard";
 
 function ProductCatalog() {
-  const productsContext = useProductsContext();
+  const productsData = useGetProducts();
 
   return (
     <>
-      {productsContext.isLoading ? (
+      {productsData.isLoading ? (
         <h2 className={styles.loading}>Загрузка...</h2>
-      ) : productsContext.isError || productsContext.displayProducts == null ? (
-        <h2 className={styles.loading}>{productsContext.error?.message}</h2>
+      ) : productsData.isError || productsData.products == null ? (
+        <h2 className={styles.loading}>{productsData.error?.message}</h2>
       ) : (
         <div className={styles.products}>
-          {productsContext.displayProducts.map((product) => (
+          {productsData.products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

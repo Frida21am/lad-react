@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
-import { Profile, ButtonCart, ThemeChanger } from "../../components/index";
+import ButtonCart from "../Cart/components/ButtonCart/ButtonCart";
+import Profile from "../Profile/Profile";
+import ThemeChanger from "../ThemeChanger/ThemeChanger";
 
 function Header() {
   const isLoggedIn = true;

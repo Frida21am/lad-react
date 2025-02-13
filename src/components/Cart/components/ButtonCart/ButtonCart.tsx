@@ -6,12 +6,11 @@ import { useCartContext } from "../../../../hooks/useCartContext";
 function ButtonCart() {
   const { theme } = useThemeContext();
 
-  const cartContext = useCartContext();
+  const { productsInCart } = useCartContext();
+
   return (
     <Link to="/cart" className={styles.btnCart}>
-      <span className={styles.btnCartCount}>
-        {cartContext.productsInCart.cart.length}
-      </span>
+      <span className={styles.btnCartCount}>{productsInCart.cart.length}</span>
       {theme === "light" ? (
         <img src="/blackCartBtn.png" alt="" className={styles.btnCartImage} />
       ) : (
